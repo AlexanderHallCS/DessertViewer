@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		110EB4E329556E5A008A1933 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB4E229556E5A008A1933 /* AppDelegate.swift */; };
 		110EB4E529556E5A008A1933 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB4E429556E5A008A1933 /* SceneDelegate.swift */; };
-		110EB4E729556E5A008A1933 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB4E629556E5A008A1933 /* ViewController.swift */; };
+		110EB4E729556E5A008A1933 /* DessertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB4E629556E5A008A1933 /* DessertViewController.swift */; };
 		110EB4EC29556E5E008A1933 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 110EB4EB29556E5E008A1933 /* Assets.xcassets */; };
 		110EB4EF29556E5E008A1933 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 110EB4ED29556E5E008A1933 /* LaunchScreen.storyboard */; };
+		110EB4FC29557237008A1933 /* DessertCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB4FB29557237008A1933 /* DessertCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		110EB4DF29556E5A008A1933 /* DessertViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DessertViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		110EB4E229556E5A008A1933 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		110EB4E429556E5A008A1933 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		110EB4E629556E5A008A1933 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		110EB4E629556E5A008A1933 /* DessertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertViewController.swift; sourceTree = "<group>"; };
 		110EB4EB29556E5E008A1933 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		110EB4EE29556E5E008A1933 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		110EB4F029556E5E008A1933 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		110EB4FB29557237008A1933 /* DessertCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,55 @@
 		110EB4E129556E5A008A1933 /* DessertViewer */ = {
 			isa = PBXGroup;
 			children = (
-				110EB4E229556E5A008A1933 /* AppDelegate.swift */,
-				110EB4E429556E5A008A1933 /* SceneDelegate.swift */,
-				110EB4E629556E5A008A1933 /* ViewController.swift */,
+				110EB4F7295571B1008A1933 /* Supporting */,
+				110EB4F9295571BF008A1933 /* Models */,
+				110EB4F6295571AB008A1933 /* Views */,
+				110EB4FA295571C7008A1933 /* ViewModels */,
+				110EB4F8295571B9008A1933 /* Controllers */,
 				110EB4EB29556E5E008A1933 /* Assets.xcassets */,
-				110EB4ED29556E5E008A1933 /* LaunchScreen.storyboard */,
 				110EB4F029556E5E008A1933 /* Info.plist */,
 			);
 			path = DessertViewer;
+			sourceTree = "<group>";
+		};
+		110EB4F6295571AB008A1933 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				110EB4FB29557237008A1933 /* DessertCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		110EB4F7295571B1008A1933 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				110EB4E229556E5A008A1933 /* AppDelegate.swift */,
+				110EB4E429556E5A008A1933 /* SceneDelegate.swift */,
+				110EB4ED29556E5E008A1933 /* LaunchScreen.storyboard */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		110EB4F8295571B9008A1933 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				110EB4E629556E5A008A1933 /* DessertViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		110EB4F9295571BF008A1933 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		110EB4FA295571C7008A1933 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,9 +177,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				110EB4E729556E5A008A1933 /* ViewController.swift in Sources */,
+				110EB4E729556E5A008A1933 /* DessertViewController.swift in Sources */,
 				110EB4E329556E5A008A1933 /* AppDelegate.swift in Sources */,
 				110EB4E529556E5A008A1933 /* SceneDelegate.swift in Sources */,
+				110EB4FC29557237008A1933 /* DessertCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
