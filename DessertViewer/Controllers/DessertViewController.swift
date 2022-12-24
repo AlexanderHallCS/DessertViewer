@@ -11,6 +11,25 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
 
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
+    private let dessertViewModel: DessertViewModel
+    
+    init(dessertViewModel: DessertViewModel) {
+        self.dessertViewModel = dessertViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private var desserts = [Dessert]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,6 +40,19 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         navigationItem.title = "Desserts"
         view.addSubview(collectionView)
+        
+        dessertViewModel.fetchDesserts(from: "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert") { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let desserts):
+                self.desserts = desserts
+                print(desserts)
+            case .failure(let error):
+                print("Error occured with message \(error)")
+                // TODO: Present error alert view
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -35,6 +67,7 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DessertCollectionViewCell.identifier, for: indexPath)
+        // TODO: Cell images are UIImage(data: fetch data from -->  desserts[indexPath.row].strMealThumb)
         return cell
     }
     
