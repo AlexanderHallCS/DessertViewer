@@ -48,7 +48,7 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
             case .success(let desserts):
                 // sort desserts alphabetically
                 self.desserts = desserts.sorted(by: { $0.strMeal < $1.strMeal })
-                print(self.desserts)
+                //print(self.desserts)
             case .failure(let error):
                 print("Error occured with message \(error)")
                 // TODO: Present error alert view
@@ -68,9 +68,9 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: DessertCollectionViewCell.identifier, for: indexPath) as? DessertCollectionViewCell)!
         // TODO: Remove this if statement and replace with property observation/waiting for first callback to finish, etc.
-        if !desserts.isEmpty{
+        if !desserts.isEmpty {
             // TODO: Fix this so it doesn't directly access the struct property
-            cell.imageView.loadImage(with: desserts[indexPath.row].strMealThumb)
+            cell.imageView.loadImage(urlString: desserts[indexPath.row].strMealThumb)
         }
         return cell
     }
@@ -84,5 +84,14 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
         return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let dessertDetailViewModel = DessertDetailViewModel(dessert: desserts[indexPath.row])
+        let dessertDetailVC = DessertDetailViewController(dessertDetailViewModel: dessertDetailViewModel)
+        navigationController?.pushViewController(dessertDetailVC, animated: true)
+        //print(desserts[indexPath.row])
+    }
+    
 }
 

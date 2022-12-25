@@ -7,12 +7,13 @@
 
 import UIKit
 
+let imageCache = NSCache<NSString, UIImage>()
+
 class DessertImageView: UIImageView {
 
     var imageURLString: String?
-    var imageCache = NSCache<NSString, UIImage>()
     
-    func loadImage(with urlString: String) {
+    func loadImage(urlString: String) {
         
         imageURLString = urlString
         
@@ -27,7 +28,6 @@ class DessertImageView: UIImageView {
         
         let request = URLSession.shared.dataTask(with: url!) { data, response, error in
             if error != nil {
-                // TODO: Move error handling outside this function via an escaping closure to present an alert(or show display error image) when image does not load
                 print(error)
                 return
             }
@@ -35,7 +35,7 @@ class DessertImageView: UIImageView {
             DispatchQueue.main.async {
                 let image = UIImage(data: data!)
                 self.image = image
-                self.imageCache.setObject(image!, forKey: urlString as NSString)
+                imageCache.setObject(image!, forKey: urlString as NSString)
             }
         }
         request.resume()

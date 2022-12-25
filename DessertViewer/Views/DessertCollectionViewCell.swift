@@ -20,7 +20,7 @@ class DessertCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageView.backgroundColor = .red
+        imageView.backgroundColor = .gray
         contentView.addSubview(imageView)
     }
     
