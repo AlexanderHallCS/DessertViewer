@@ -46,8 +46,9 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
             
             switch result {
             case .success(let desserts):
-                self.desserts = desserts
-                print(desserts)
+                // sort desserts alphabetically
+                self.desserts = desserts.sorted(by: { $0.strMeal < $1.strMeal })
+                print(self.desserts)
             case .failure(let error):
                 print("Error occured with message \(error)")
                 // TODO: Present error alert view
@@ -61,19 +62,22 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: Replace with model count
-        return 5
+        return desserts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DessertCollectionViewCell.identifier, for: indexPath)
-        // TODO: Cell images are UIImage(data: fetch data from -->  desserts[indexPath.row].strMealThumb)
+        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: DessertCollectionViewCell.identifier, for: indexPath) as? DessertCollectionViewCell)!
+        // TODO: Remove this if statement and replace with property observation/waiting for first callback to finish, etc.
+        if !desserts.isEmpty{
+            // TODO: Fix this so it doesn't directly access the struct property
+            cell.imageView.loadImage(with: desserts[indexPath.row].strMealThumb)
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width/2 - 10,
-                      height: view.frame.height/2 - 10)
+                      height: view.frame.width/2 - 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

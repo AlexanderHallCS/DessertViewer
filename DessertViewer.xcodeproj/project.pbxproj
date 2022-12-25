@@ -16,6 +16,7 @@
 		110EB4FE29569544008A1933 /* Dessert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB4FD29569544008A1933 /* Dessert.swift */; };
 		110EB5022957A7E0008A1933 /* DessertDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB5012957A7E0008A1933 /* DessertDetail.swift */; };
 		110EB5042957AC09008A1933 /* DessertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB5032957AC09008A1933 /* DessertViewModel.swift */; };
+		110EB5092957E331008A1933 /* DessertImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB5082957E331008A1933 /* DessertImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		110EB4FD29569544008A1933 /* Dessert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dessert.swift; sourceTree = "<group>"; };
 		110EB5012957A7E0008A1933 /* DessertDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertDetail.swift; sourceTree = "<group>"; };
 		110EB5032957AC09008A1933 /* DessertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertViewModel.swift; sourceTree = "<group>"; };
+		110EB5082957E331008A1933 /* DessertImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				110EB4FB29557237008A1933 /* DessertCollectionViewCell.swift */,
+				110EB5082957E331008A1933 /* DessertImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				110EB4FE29569544008A1933 /* Dessert.swift in Sources */,
+				110EB5092957E331008A1933 /* DessertImageView.swift in Sources */,
 				110EB4E729556E5A008A1933 /* DessertViewController.swift in Sources */,
 				110EB4E329556E5A008A1933 /* AppDelegate.swift in Sources */,
 				110EB4E529556E5A008A1933 /* SceneDelegate.swift in Sources */,

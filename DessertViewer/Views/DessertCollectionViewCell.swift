@@ -11,8 +11,8 @@ class DessertCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "DessertCollectionViewCell"
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
+    let imageView: DessertImageView = {
+        let imageView = DessertImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
@@ -20,8 +20,6 @@ class DessertCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        // TODO: Replace below with fetched image
-        //imageView.image = UIImage()
         imageView.backgroundColor = .red
         contentView.addSubview(imageView)
     }
