@@ -38,7 +38,7 @@ class DessertDetailViewController: UIViewController {
         let instructionsLabel = UILabel()
         instructionsLabel.text = "Instructions:"
         instructionsLabel.minimumScaleFactor = 0.5
-        instructionsLabel.font = .systemFont(ofSize: 30)
+        instructionsLabel.font = .systemFont(ofSize: 20)
         return instructionsLabel
     }()
     
@@ -48,6 +48,22 @@ class DessertDetailViewController: UIViewController {
         instructionsListLabel.font = .systemFont(ofSize: 14)
         instructionsListLabel.numberOfLines = 0
         return instructionsListLabel
+    }()
+    
+    let ingredientsLabel: UILabel = {
+        let ingredientsLabel = UILabel()
+        ingredientsLabel.text = "Ingredients/Measurements:"
+        ingredientsLabel.minimumScaleFactor = 0.5
+        ingredientsLabel.font = .systemFont(ofSize: 20)
+        return ingredientsLabel
+    }()
+    
+    let ingredientsListLabel: UILabel = {
+        let ingredientsListLabel = UILabel()
+        ingredientsListLabel.minimumScaleFactor = 0.5
+        ingredientsListLabel.font = .systemFont(ofSize: 14)
+        ingredientsListLabel.numberOfLines = 0
+        return ingredientsListLabel
     }()
     
     private let dessertDetailViewModel: DessertDetailViewModel
@@ -77,6 +93,7 @@ class DessertDetailViewController: UIViewController {
                 let instructions = dessertDetail.strInstructions ?? ""
                 DispatchQueue.main.async {
                     self.instructionsListLabel.text = self.dessertDetailViewModel.formatInstructions(instructions)
+                    self.ingredientsListLabel.text = self.dessertDetailViewModel.formatIngredientsAndMeasures(dessertDetail.ingredients, dessertDetail.measures)
                 }
                 return
             }
@@ -87,10 +104,15 @@ class DessertDetailViewController: UIViewController {
         
         dessertImageParentView.addSubview(dessertImageView)
         stackView.addArrangedSubview(dessertImageParentView)
+        
         stackView.addArrangedSubview(instructionsLabel)
         stackView.addArrangedSubview(instructionsListLabel)
         
+        stackView.addArrangedSubview(ingredientsLabel)
+        stackView.addArrangedSubview(ingredientsListLabel)
+        
         dessertImageView.loadImage(urlString: dessert.strMealThumb)
+        scrollView.showsVerticalScrollIndicator = false
         
         setUpConstraints()
         
@@ -99,13 +121,11 @@ class DessertDetailViewController: UIViewController {
     
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
@@ -116,7 +136,10 @@ class DessertDetailViewController: UIViewController {
             dessertImageView.widthAnchor.constraint(equalToConstant: view.frame.width/1.5),
             dessertImageView.heightAnchor.constraint(equalToConstant: view.frame.width/1.5),
             
-            instructionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10)
+            instructionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            instructionsListLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            ingredientsListLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         ])
     }
     

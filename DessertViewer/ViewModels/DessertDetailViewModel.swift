@@ -44,8 +44,8 @@ class DessertDetailViewModel {
     // returns instructions string from API as a string in the format:
     // 1. [instruction]\n ... nth. [instruction]
     func formatInstructions(_ instructions: String) -> String {
-        // split on \r\n\r\n and between sentences (. )
-        let pattern = "\\r\\n\\r\\n|(?<=\\.) "
+        // split on \r\n\r\n, \r\n, and between sentences (. )
+        let pattern = "\\r\\n\\r\\n|\\r\\n|(?<=\\.) "
         let steps = instructions.split(pattern: pattern)
         
         var result = ""
@@ -53,6 +53,17 @@ class DessertDetailViewModel {
             result += "\(step + 1). " + steps[step] + "\n"
         }
         
+        return result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    }
+    
+    func formatIngredientsAndMeasures(_ ingredients: [String], _ measures: [String]) -> String {
+        var result = ""
+        for i in 0..<ingredients.count {
+            if ingredients[i].isEmpty || measures[i].isEmpty {
+                break
+            }
+            result += "• \(measures[i]) \(ingredients[i])\n"
+        }
         return result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
