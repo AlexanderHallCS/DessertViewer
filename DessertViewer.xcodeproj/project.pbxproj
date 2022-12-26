@@ -19,6 +19,7 @@
 		110EB5092957E331008A1933 /* DessertImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB5082957E331008A1933 /* DessertImageView.swift */; };
 		110EB50B2958CE8F008A1933 /* DessertDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB50A2958CE8E008A1933 /* DessertDetailViewController.swift */; };
 		110EB50D2958CFA4008A1933 /* DessertDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB50C2958CFA4008A1933 /* DessertDetailViewModel.swift */; };
+		110EB511295A659D008A1933 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB510295A659D008A1933 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		110EB5082957E331008A1933 /* DessertImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertImageView.swift; sourceTree = "<group>"; };
 		110EB50A2958CE8E008A1933 /* DessertDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertDetailViewController.swift; sourceTree = "<group>"; };
 		110EB50C2958CFA4008A1933 /* DessertDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertDetailViewModel.swift; sourceTree = "<group>"; };
+		110EB510295A659D008A1933 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				110EB4E229556E5A008A1933 /* AppDelegate.swift */,
 				110EB4E429556E5A008A1933 /* SceneDelegate.swift */,
 				110EB4ED29556E5E008A1933 /* LaunchScreen.storyboard */,
+				110EB510295A659D008A1933 /* Extensions.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				110EB4E729556E5A008A1933 /* DessertViewController.swift in Sources */,
 				110EB4E329556E5A008A1933 /* AppDelegate.swift in Sources */,
 				110EB4E529556E5A008A1933 /* SceneDelegate.swift in Sources */,
+				110EB511295A659D008A1933 /* Extensions.swift in Sources */,
 				110EB5042957AC09008A1933 /* DessertViewModel.swift in Sources */,
 				110EB5022957A7E0008A1933 /* DessertDetail.swift in Sources */,
 				110EB50B2958CE8F008A1933 /* DessertDetailViewController.swift in Sources */,

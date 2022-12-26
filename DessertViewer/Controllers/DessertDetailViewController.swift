@@ -97,15 +97,14 @@ class DessertDetailViewController: UIViewController {
         
         dessertDetailViewModel.fetchDessertDetails(from: "https://themealdb.com/api/json/v1/1/lookup.php?i=" + dessert.idMeal) { result in
             switch result {
-            case .failure(let error):
-                print(error)
+            case .failure(_):
                 DispatchQueue.main.async {
                     self.activityIndicatorView.stopAnimating()
                     self.activityIndicatorView.removeFromSuperview()
+                    self.displayAlert(title: "Error!", message: "Could not get dessert details! Please go back and try again.")
                 }
                 return
             case .success(let dessertDetail):
-                print(dessertDetail)
                 let instructions = dessertDetail.strInstructions ?? ""
                 DispatchQueue.main.async {
                     self.instructionsListLabel.text = self.dessertDetailViewModel.formatInstructions(instructions)

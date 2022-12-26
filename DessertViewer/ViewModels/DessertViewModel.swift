@@ -11,9 +11,9 @@ class DessertViewModel {
     
     func fetchDesserts(from endpoint: String, completion: @escaping (Result<[Dessert], Error>) -> Void) {
         
-        let url = URL(string: endpoint)
+        guard let url = URL(string: endpoint) else { return }
         
-        let request = URLSession.shared.dataTask(with: url!) { data, response, error in
+        let request = URLSession.shared.dataTask(with: url) { data, response, error in
             if error != nil {
                 completion(.failure(error!))
                 return

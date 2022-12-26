@@ -17,23 +17,21 @@ class DessertDetailViewModel {
     
     func fetchDessertDetails(from endpoint: String, completion: @escaping (Result<DessertDetail, Error>) -> Void) {
         
-        let url = URL(string: endpoint)
+        guard let url = URL(string: endpoint) else { return }
         
-        let request = URLSession.shared.dataTask(with: url!) { data, response, error in
+        let request = URLSession.shared.dataTask(with: url) { data, response, error in
             if error != nil {
-                print(error)
                 completion(.failure(error!))
                 return
             }
             
             do {
                 let result = try JSONDecoder().decode([String:[[String:String?]]].self, from: data!)
-                let dessertDetail = result.compactMap { tuple -> DessertDetail in
-                    let dessertDetailDict = tuple.value.first!
+                let dessertDetail = result.compactMap { meals -> DessertDetail in
+                    let dessertDetailDict = meals.value.first!
                     return DessertDetail(dessertDetailDict: dessertDetailDict)
-                }
-                print(dessertDetail.first!)
-                completion(.success(dessertDetail.first!))
+                }.first!
+                completion(.success(dessertDetail))
             } catch {
                 completion(.failure(error))
             }
@@ -41,8 +39,7 @@ class DessertDetailViewModel {
         request.resume()
     }
     
-    // returns instructions string from API as a string in the format:
-    // 1. [instruction]\n ... nth. [instruction]
+    // returns instructions as a numbered list string
     func formatInstructions(_ instructions: String) -> String {
         // split on \r\n\r\n, \r\n, and between sentences (. )
         let pattern = "\\r\\n\\r\\n|\\r\\n|(?<=\\.) "
@@ -56,6 +53,7 @@ class DessertDetailViewModel {
         return result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
     
+    // returns ingredients/measures as a bullet list string
     func formatIngredientsAndMeasures(_ ingredients: [String], _ measures: [String]) -> String {
         var result = ""
         for i in 0..<ingredients.count {
@@ -66,7 +64,6 @@ class DessertDetailViewModel {
         }
         return result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
-    
 }
 
 extension String {

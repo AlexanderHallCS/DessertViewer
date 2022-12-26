@@ -17,7 +17,7 @@ class DessertImageView: UIImageView {
         
         imageURLString = urlString
         
-        let url = URL(string: imageURLString!)
+        guard let url = URL(string: imageURLString!) else { return }
         
         image = nil
         
@@ -26,9 +26,8 @@ class DessertImageView: UIImageView {
             return
         }
         
-        let request = URLSession.shared.dataTask(with: url!) { data, response, error in
+        let request = URLSession.shared.dataTask(with: url) { data, response, error in
             if error != nil {
-                print(error)
                 return
             }
             

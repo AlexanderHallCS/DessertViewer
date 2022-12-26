@@ -52,12 +52,13 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
             guard let self = self else { return }
             
             switch result {
+            case .failure(_):
+                DispatchQueue.main.async {
+                    self.displayAlert(title: "Error!", message: "Could not get list of desserts! Please refresh.")
+                }
             case .success(let desserts):
                 // sort desserts alphabetically
                 self.desserts = desserts.sorted(by: { $0.strMeal < $1.strMeal })
-            case .failure(let error):
-                print("Error occured with message \(error)")
-                // TODO: Present error alert view
             }
         }
         
@@ -78,12 +79,8 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: DessertCollectionViewCell.identifier, for: indexPath) as? DessertCollectionViewCell)!
-        // TODO: Remove this if statement and replace with property observation/waiting for first callback to finish, etc.
-        if !desserts.isEmpty {
-            // TODO: Fix this so it doesn't directly access the struct property
-            cell.dessertImageView.loadImage(urlString: desserts[indexPath.row].strMealThumb)
-            cell.dessertNameLabel.text = desserts[indexPath.row].strMeal
-        }
+        cell.dessertImageView.loadImage(urlString: desserts[indexPath.row].strMealThumb)
+        cell.dessertNameLabel.text = desserts[indexPath.row].strMeal
         return cell
     }
     
