@@ -11,6 +11,14 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
 
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.style = .large
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicatorView
+    }()
+    
     private var desserts = [Dessert]() {
         didSet {
             DispatchQueue.main.async {
@@ -38,21 +46,31 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        navigationItem.title = "Desserts"
-        view.addSubview(collectionView)
-        
         dessertViewModel.fetchDesserts(from: "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert") { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let desserts):
+                DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    self.activityIndicatorView.removeFromSuperview()
+                }
                 // sort desserts alphabetically
                 self.desserts = desserts.sorted(by: { $0.strMeal < $1.strMeal })
             case .failure(let error):
                 print("Error occured with message \(error)")
+                DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    self.activityIndicatorView.removeFromSuperview()
+                }
                 // TODO: Present error alert view
             }
         }
+        
+        navigationItem.title = "Desserts"
+        view.addSubview(collectionView)
+        view.addSubview(activityIndicatorView)
+        setUpConstraints()
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,6 +108,13 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
         let dessertDetailViewModel = DessertDetailViewModel(dessert: desserts[indexPath.row])
         let dessertDetailVC = DessertDetailViewController(dessertDetailViewModel: dessertDetailViewModel)
         navigationController?.pushViewController(dessertDetailVC, animated: true)
+    }
+    
+    private func setUpConstraints() {
+        NSLayoutConstraint.activate([
+            activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
 }
