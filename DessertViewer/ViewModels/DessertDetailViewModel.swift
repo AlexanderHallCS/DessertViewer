@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DessertDetailViewModel: ObservableObject {
+class DessertDetailViewModel {
     
     let dessert: Dessert
     
@@ -27,8 +27,13 @@ class DessertDetailViewModel: ObservableObject {
             }
             
             do {
-                let result = try JSONDecoder().decode(DessertDetailCollection.self, from: data!)
-                completion(.success(result.dessertDetails.first!))
+                let result = try JSONDecoder().decode([String:[[String:String?]]].self, from: data!)
+                let dessertDetail = result.compactMap { tuple -> DessertDetail in
+                    let dessertDetailDict = tuple.value.first!
+                    return DessertDetail(dessertDetailDict: dessertDetailDict)
+                }
+                print(dessertDetail.first!)
+                completion(.success(dessertDetail.first!))
             } catch {
                 completion(.failure(error))
             }
@@ -36,6 +41,8 @@ class DessertDetailViewModel: ObservableObject {
         request.resume()
     }
     
+    // returns instructions string from API as a string in the format:
+    // 1. [instruction]\n ... nth. [instruction]
     func formatInstructions(_ instructions: String) -> String {
         // split on \r\n\r\n and between sentences (. )
         let pattern = "\\r\\n\\r\\n|(?<=\\.) "

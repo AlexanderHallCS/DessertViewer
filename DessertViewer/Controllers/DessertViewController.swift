@@ -48,7 +48,6 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
             case .success(let desserts):
                 // sort desserts alphabetically
                 self.desserts = desserts.sorted(by: { $0.strMeal < $1.strMeal })
-                //print(self.desserts)
             case .failure(let error):
                 print("Error occured with message \(error)")
                 // TODO: Present error alert view
