@@ -29,8 +29,8 @@ class DessertDetailViewController: UIViewController {
         let imageView = DessertImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .gray
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -39,6 +39,7 @@ class DessertDetailViewController: UIViewController {
         instructionsLabel.text = "Instructions:"
         instructionsLabel.minimumScaleFactor = 0.5
         instructionsLabel.font = .systemFont(ofSize: 20)
+        instructionsLabel.translatesAutoresizingMaskIntoConstraints = false
         return instructionsLabel
     }()
     
@@ -47,6 +48,7 @@ class DessertDetailViewController: UIViewController {
         instructionsListLabel.minimumScaleFactor = 0.5
         instructionsListLabel.font = .systemFont(ofSize: 14)
         instructionsListLabel.numberOfLines = 0
+        instructionsListLabel.translatesAutoresizingMaskIntoConstraints = false
         return instructionsListLabel
     }()
     
@@ -55,6 +57,7 @@ class DessertDetailViewController: UIViewController {
         ingredientsLabel.text = "Ingredients/Measurements:"
         ingredientsLabel.minimumScaleFactor = 0.5
         ingredientsLabel.font = .systemFont(ofSize: 20)
+        ingredientsLabel.translatesAutoresizingMaskIntoConstraints = false
         return ingredientsLabel
     }()
     
@@ -63,7 +66,16 @@ class DessertDetailViewController: UIViewController {
         ingredientsListLabel.minimumScaleFactor = 0.5
         ingredientsListLabel.font = .systemFont(ofSize: 14)
         ingredientsListLabel.numberOfLines = 0
+        ingredientsListLabel.translatesAutoresizingMaskIntoConstraints = false
         return ingredientsListLabel
+    }()
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.style = .large
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicatorView
     }()
     
     private let dessertDetailViewModel: DessertDetailViewModel
@@ -87,6 +99,10 @@ class DessertDetailViewController: UIViewController {
             switch result {
             case .failure(let error):
                 print(error)
+                DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    self.activityIndicatorView.removeFromSuperview()
+                }
                 return
             case .success(let dessertDetail):
                 print(dessertDetail)
@@ -94,12 +110,15 @@ class DessertDetailViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.instructionsListLabel.text = self.dessertDetailViewModel.formatInstructions(instructions)
                     self.ingredientsListLabel.text = self.dessertDetailViewModel.formatIngredientsAndMeasures(dessertDetail.ingredients, dessertDetail.measures)
+                    self.activityIndicatorView.stopAnimating()
+                    self.activityIndicatorView.removeFromSuperview()
                 }
                 return
             }
         }
         
         view.addSubview(scrollView)
+        view.addSubview(activityIndicatorView)
         scrollView.addSubview(stackView)
         
         dessertImageParentView.addSubview(dessertImageView)
@@ -140,6 +159,9 @@ class DessertDetailViewController: UIViewController {
             instructionsListLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             ingredientsListLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            activityIndicatorView.topAnchor.constraint(equalTo: dessertImageView.bottomAnchor, constant: 10),
+            activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     

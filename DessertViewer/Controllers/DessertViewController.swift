@@ -22,6 +22,8 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
     private var desserts = [Dessert]() {
         didSet {
             DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
+                self.activityIndicatorView.removeFromSuperview()
                 self.collectionView.reloadData()
             }
         }
@@ -51,18 +53,10 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
             
             switch result {
             case .success(let desserts):
-                DispatchQueue.main.async {
-                    self.activityIndicatorView.stopAnimating()
-                    self.activityIndicatorView.removeFromSuperview()
-                }
                 // sort desserts alphabetically
                 self.desserts = desserts.sorted(by: { $0.strMeal < $1.strMeal })
             case .failure(let error):
                 print("Error occured with message \(error)")
-                DispatchQueue.main.async {
-                    self.activityIndicatorView.stopAnimating()
-                    self.activityIndicatorView.removeFromSuperview()
-                }
                 // TODO: Present error alert view
             }
         }
