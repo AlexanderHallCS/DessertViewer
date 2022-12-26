@@ -70,13 +70,14 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
         if !desserts.isEmpty {
             // TODO: Fix this so it doesn't directly access the struct property
             cell.dessertImageView.loadImage(urlString: desserts[indexPath.row].strMealThumb)
+            cell.dessertNameLabel.text = desserts[indexPath.row].strMeal
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width/2 - 10,
-                      height: view.frame.width/2 - 10)
+                      height: view.frame.height/3.7)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
