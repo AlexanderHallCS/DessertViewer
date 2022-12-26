@@ -9,7 +9,15 @@ import UIKit
 
 class DessertViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
+    private var desserts = [Dessert]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
     private let dessertViewModel: DessertViewModel
     
@@ -20,14 +28,6 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private var desserts = [Dessert]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
     }
     
     override func viewDidLoad() {
@@ -70,7 +70,7 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
         // TODO: Remove this if statement and replace with property observation/waiting for first callback to finish, etc.
         if !desserts.isEmpty {
             // TODO: Fix this so it doesn't directly access the struct property
-            cell.imageView.loadImage(urlString: desserts[indexPath.row].strMealThumb)
+            cell.dessertImageView.loadImage(urlString: desserts[indexPath.row].strMealThumb)
         }
         return cell
     }
@@ -90,7 +90,6 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
         let dessertDetailViewModel = DessertDetailViewModel(dessert: desserts[indexPath.row])
         let dessertDetailVC = DessertDetailViewController(dessertDetailViewModel: dessertDetailViewModel)
         navigationController?.pushViewController(dessertDetailVC, animated: true)
-        //print(desserts[indexPath.row])
     }
     
 }

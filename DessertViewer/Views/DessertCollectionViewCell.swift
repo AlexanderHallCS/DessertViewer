@@ -11,17 +11,17 @@ class DessertCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "DessertCollectionViewCell"
     
-    let imageView: DessertImageView = {
+    let dessertImageView: DessertImageView = {
         let imageView = DessertImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.backgroundColor = .gray
         return imageView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        imageView.backgroundColor = .gray
-        contentView.addSubview(imageView)
+        contentView.addSubview(dessertImageView)
     }
     
     required init?(coder: NSCoder) {
@@ -30,7 +30,7 @@ class DessertCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.frame = contentView.bounds
+        dessertImageView.frame = contentView.bounds
     }
     
 }
