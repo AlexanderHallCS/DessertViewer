@@ -36,7 +36,7 @@ class DessertDetailViewController: UIViewController {
     
     let instructionsLabel: UILabel = {
         let instructionsLabel = UILabel()
-        instructionsLabel.text = "Instructions"
+        instructionsLabel.text = "Instructions:"
         instructionsLabel.minimumScaleFactor = 0.5
         instructionsLabel.font = .systemFont(ofSize: 30)
         return instructionsLabel
@@ -45,13 +45,12 @@ class DessertDetailViewController: UIViewController {
     let instructionsListLabel: UILabel = {
         let instructionsListLabel = UILabel()
         instructionsListLabel.minimumScaleFactor = 0.5
-        instructionsListLabel.font = .systemFont(ofSize: 12)
+        instructionsListLabel.font = .systemFont(ofSize: 14)
+        instructionsListLabel.numberOfLines = 0
         return instructionsListLabel
     }()
     
     private let dessertDetailViewModel: DessertDetailViewModel
-    
-    private var dessertDetail: DessertDetail?
     
     init(dessertDetailViewModel: DessertDetailViewModel) {
         self.dessertDetailViewModel = dessertDetailViewModel
@@ -75,7 +74,10 @@ class DessertDetailViewController: UIViewController {
                 return
             case .success(let dessertDetail):
                 print(dessertDetail)
-                self.dessertDetail = dessertDetail
+                let instructions = dessertDetail.strInstructions ?? ""
+                DispatchQueue.main.async {
+                    self.instructionsListLabel.text = self.dessertDetailViewModel.formatInstructions(instructions)
+                }
                 return
             }
         }
@@ -86,6 +88,7 @@ class DessertDetailViewController: UIViewController {
         dessertImageParentView.addSubview(dessertImageView)
         stackView.addArrangedSubview(dessertImageParentView)
         stackView.addArrangedSubview(instructionsLabel)
+        stackView.addArrangedSubview(instructionsListLabel)
         
         dessertImageView.loadImage(urlString: dessert.strMealThumb)
         
