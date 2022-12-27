@@ -15,15 +15,11 @@ class DessertDetailViewController: UIViewController {
         return scrollView
     }()
     
-    let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    let contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
     }()
-    
-    let dessertImageParentView = UIView()
     
     let dessertImageView: DessertImageView = {
         let imageView = DessertImageView()
@@ -118,20 +114,16 @@ class DessertDetailViewController: UIViewController {
         
         view.addSubview(scrollView)
         view.addSubview(activityIndicatorView)
-        scrollView.addSubview(stackView)
+        scrollView.addSubview(contentView)
         
-        dessertImageParentView.addSubview(dessertImageView)
-        stackView.addArrangedSubview(dessertImageParentView)
-        
-        stackView.addArrangedSubview(instructionsLabel)
-        stackView.addArrangedSubview(instructionsListLabel)
-        
-        stackView.addArrangedSubview(ingredientsLabel)
-        stackView.addArrangedSubview(ingredientsListLabel)
+        contentView.addSubview(dessertImageView)
+        contentView.addSubview(instructionsLabel)
+        contentView.addSubview(instructionsListLabel)
+        contentView.addSubview(ingredientsLabel)
+        contentView.addSubview(ingredientsListLabel)
         
         dessertImageView.loadImage(urlString: dessert.strMealThumb)
-        scrollView.showsVerticalScrollIndicator = false
-        
+        //scrollView.showsVerticalScrollIndicator = false
         setUpConstraints()
         
         view.backgroundColor = .systemBackground
@@ -139,25 +131,41 @@ class DessertDetailViewController: UIViewController {
     
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
-            dessertImageParentView.heightAnchor.constraint(equalToConstant: view.frame.height/3),
+            dessertImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             dessertImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dessertImageView.centerYAnchor.constraint(equalTo: dessertImageParentView.centerYAnchor),
             dessertImageView.widthAnchor.constraint(equalToConstant: view.frame.width/1.5),
             dessertImageView.heightAnchor.constraint(equalToConstant: view.frame.width/1.5),
             
+            instructionsLabel.topAnchor.constraint(equalTo: dessertImageView.bottomAnchor, constant: 10),
             instructionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            instructionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            instructionsLabel.bottomAnchor.constraint(equalTo: instructionsListLabel.topAnchor, constant: -10),
+            
+            instructionsListLabel.topAnchor.constraint(equalTo: instructionsLabel.bottomAnchor, constant: 10),
             instructionsListLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            instructionsListLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            instructionsListLabel.bottomAnchor.constraint(equalTo: ingredientsLabel.topAnchor, constant: -10),
+            
+            ingredientsLabel.topAnchor.constraint(equalTo: instructionsListLabel.bottomAnchor, constant: 10),
             ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            ingredientsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            ingredientsLabel.bottomAnchor.constraint(equalTo: ingredientsListLabel.topAnchor, constant: -10),
+            
+            ingredientsListLabel.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 10),
             ingredientsListLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            ingredientsListLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            ingredientsListLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             activityIndicatorView.topAnchor.constraint(equalTo: dessertImageView.bottomAnchor, constant: 10),
             activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
