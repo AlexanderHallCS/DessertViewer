@@ -34,7 +34,8 @@ class DessertDetailViewController: UIViewController {
         let instructionsLabel = UILabel()
         instructionsLabel.text = "Instructions:"
         instructionsLabel.minimumScaleFactor = 0.5
-        instructionsLabel.font = .systemFont(ofSize: 20)
+        instructionsLabel.adjustsFontSizeToFitWidth = true
+        instructionsLabel.font = .systemFont(ofSize: 25)
         instructionsLabel.translatesAutoresizingMaskIntoConstraints = false
         return instructionsLabel
     }()
@@ -42,7 +43,8 @@ class DessertDetailViewController: UIViewController {
     let instructionsListLabel: UILabel = {
         let instructionsListLabel = UILabel()
         instructionsListLabel.minimumScaleFactor = 0.5
-        instructionsListLabel.font = .systemFont(ofSize: 14)
+        instructionsListLabel.adjustsFontSizeToFitWidth = true
+        instructionsListLabel.font = .systemFont(ofSize: 20)
         instructionsListLabel.numberOfLines = 0
         instructionsListLabel.translatesAutoresizingMaskIntoConstraints = false
         return instructionsListLabel
@@ -52,7 +54,8 @@ class DessertDetailViewController: UIViewController {
         let ingredientsLabel = UILabel()
         ingredientsLabel.text = "Ingredients/Measurements:"
         ingredientsLabel.minimumScaleFactor = 0.5
-        ingredientsLabel.font = .systemFont(ofSize: 20)
+        ingredientsLabel.adjustsFontSizeToFitWidth = true
+        ingredientsLabel.font = .systemFont(ofSize: 25)
         ingredientsLabel.translatesAutoresizingMaskIntoConstraints = false
         return ingredientsLabel
     }()
@@ -60,7 +63,8 @@ class DessertDetailViewController: UIViewController {
     let ingredientsListLabel: UILabel = {
         let ingredientsListLabel = UILabel()
         ingredientsListLabel.minimumScaleFactor = 0.5
-        ingredientsListLabel.font = .systemFont(ofSize: 14)
+        ingredientsListLabel.adjustsFontSizeToFitWidth = true
+        ingredientsListLabel.font = .systemFont(ofSize: 20)
         ingredientsListLabel.numberOfLines = 0
         ingredientsListLabel.translatesAutoresizingMaskIntoConstraints = false
         return ingredientsListLabel
@@ -143,8 +147,8 @@ class DessertDetailViewController: UIViewController {
             
             dessertImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             dessertImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dessertImageView.widthAnchor.constraint(equalToConstant: view.frame.width/1.5),
-            dessertImageView.heightAnchor.constraint(equalToConstant: view.frame.width/1.5),
+            dessertImageView.widthAnchor.constraint(equalToConstant: view.frame.height/3),
+            dessertImageView.heightAnchor.constraint(equalToConstant: view.frame.height/3),
             
             instructionsLabel.topAnchor.constraint(equalTo: dessertImageView.bottomAnchor, constant: 10),
             instructionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
