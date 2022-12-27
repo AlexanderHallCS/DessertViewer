@@ -21,11 +21,13 @@ class DessertImageView: UIImageView {
         
         image = nil
         
+        // use cached image, if present
         if let cachedImage = imageCache.object(forKey: urlString as NSString) {
             self.image = cachedImage
             return
         }
         
+        // make request if image is not in the cache
         let request = URLSession.shared.dataTask(with: url) { data, response, error in
             if error != nil {
                 return

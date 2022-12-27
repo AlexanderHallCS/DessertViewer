@@ -36,14 +36,18 @@ struct DessertDetail: Codable {
         var ingredients = Array.init(repeating: "", count: 20)
         var measures = Array.init(repeating: "", count: 20)
         
+        // find all keys starting with "strIngredient" or "strMeasure" and add their value
+        // to the ingredients and measures lists
         for (key, val) in dessertDetailDict {
             if key.starts(with: "strIngredient") {
                 let ingredient = val?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                // extract index(#) from, "strIngredient#"
                 let ingredientIdx = Int(key.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())! - 1
                 ingredients[ingredientIdx] = ingredient ?? ""
             }
             if key.starts(with: "strMeasure") {
                 let measure = val?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                // extract index(#) from, "strMeasure#"
                 let measureIdx = Int(key.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())! - 1
                 measures[measureIdx] = measure ?? ""
             }

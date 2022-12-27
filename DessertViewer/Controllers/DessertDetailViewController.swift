@@ -108,6 +108,7 @@ class DessertDetailViewController: UIViewController {
             case .success(let dessertDetail):
                 let instructions = dessertDetail.strInstructions ?? ""
                 DispatchQueue.main.async {
+                    // update the list labels and activity indicator when data is received
                     self.instructionsListLabel.text = self.dessertDetailViewModel.formatInstructions(instructions)
                     self.ingredientsListLabel.text = self.dessertDetailViewModel.formatIngredientsAndMeasures(dessertDetail.ingredients, dessertDetail.measures)
                     self.activityIndicatorView.stopAnimating()

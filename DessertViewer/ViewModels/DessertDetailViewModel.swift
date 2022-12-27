@@ -27,6 +27,8 @@ class DessertDetailViewModel {
             
             do {
                 let result = try JSONDecoder().decode([String:[[String:String?]]].self, from: data!)
+                // from the "meals" list in the JSON, extract the first element(dictionary of dessert details)
+                // and parse the details (dessertDetailDict) into a DessertDetail object
                 let dessertDetail = result.compactMap { meals -> DessertDetail in
                     let dessertDetailDict = meals.value.first!
                     return DessertDetail(dessertDetailDict: dessertDetailDict)
