@@ -10,11 +10,11 @@ import Foundation
 struct Constants {
     
     struct DessertVC {
-        static let navigationItemTitle = "Desserts"
         static let cellEdgeInsetPadding = 5.0
-        static let cellWidthRatio = 2.0
         static let cellHeightRatio = 1.65
+        static let cellWidthRatio = 2.0
         static let cellSubConstant = 10.0
+        static let navigationItemTitle = "Desserts"
     }
     
     struct DessertDetailVC {
@@ -22,24 +22,24 @@ struct Constants {
         static let ingredientsLabelText = "Ingredients/Measurements:"
         
         static let minimumScaleFactor = 0.5
-        static let sectionLabelFont = 25.0
         static let listLabelFont = 20.0
+        static let sectionLabelFont = 25.0
         
         struct Constraints {
-            static let imageViewDimRatio = 3.0
+            static let activityIndicatorTopPadding = 10.0
             
-            static let sectionLabelPadding = 10.0
+            static let imageViewDimRatio = 3.0
             
             static let listLabelHorizPadding = 20.0
             static let listLabelVertPadding = 10.0
             
-            static let activityIndicatorTopPadding = 10.0
+            static let sectionLabelPadding = 10.0
         }
     }
     
     struct DessertCollectionViewCell {
-        static let minimumScaleFactor = 0.5
         static let fontSize = 30.0
+        static let minimumScaleFactor = 0.5
     }
     
     struct Endpoints {

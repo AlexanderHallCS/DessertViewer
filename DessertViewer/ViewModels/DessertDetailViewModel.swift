@@ -43,7 +43,7 @@ class DessertDetailViewModel {
     func formatInstructions(_ instructions: String) -> String {
         // split on \r\n\r\n, \r\n, and between sentences (. )
         let pattern = "\\r\\n\\r\\n|\\r\\n|(?<=\\.) "
-        let steps = instructions.split(pattern: pattern)
+        let steps = instructions.split(pattern: pattern).filter { !$0.isEmpty }
         
         var result = ""
         for step in steps.indices {
@@ -56,7 +56,7 @@ class DessertDetailViewModel {
     // returns ingredients/measures as a bullet list string
     func formatIngredientsAndMeasures(_ ingredients: [String], _ measures: [String]) -> String {
         var result = ""
-        for i in 0..<ingredients.count {
+        for i in 0..<min(ingredients.count, measures.count) {
             if ingredients[i].isEmpty || measures[i].isEmpty {
                 break
             }
