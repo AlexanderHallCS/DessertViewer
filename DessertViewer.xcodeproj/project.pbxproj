@@ -20,6 +20,7 @@
 		110EB50B2958CE8F008A1933 /* DessertDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB50A2958CE8E008A1933 /* DessertDetailViewController.swift */; };
 		110EB50D2958CFA4008A1933 /* DessertDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB50C2958CFA4008A1933 /* DessertDetailViewModel.swift */; };
 		110EB511295A659D008A1933 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB510295A659D008A1933 /* Extensions.swift */; };
+		110EB513295A8F9F008A1933 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110EB512295A8F9E008A1933 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		110EB50A2958CE8E008A1933 /* DessertDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertDetailViewController.swift; sourceTree = "<group>"; };
 		110EB50C2958CFA4008A1933 /* DessertDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertDetailViewModel.swift; sourceTree = "<group>"; };
 		110EB510295A659D008A1933 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		110EB512295A8F9E008A1933 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				110EB4E229556E5A008A1933 /* AppDelegate.swift */,
 				110EB4E429556E5A008A1933 /* SceneDelegate.swift */,
 				110EB4ED29556E5E008A1933 /* LaunchScreen.storyboard */,
+				110EB512295A8F9E008A1933 /* Constants.swift */,
 				110EB510295A659D008A1933 /* Extensions.swift */,
 			);
 			path = Supporting;
@@ -209,6 +212,7 @@
 				110EB5022957A7E0008A1933 /* DessertDetail.swift in Sources */,
 				110EB50B2958CE8F008A1933 /* DessertDetailViewController.swift in Sources */,
 				110EB4FC29557237008A1933 /* DessertCollectionViewCell.swift in Sources */,
+				110EB513295A8F9F008A1933 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

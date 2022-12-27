@@ -24,9 +24,9 @@ class DessertCollectionViewCell: UICollectionViewCell {
     
     let dessertNameLabel: UILabel = {
         let dessertNameLabel = UILabel()
-        dessertNameLabel.minimumScaleFactor = 0.5
+        dessertNameLabel.minimumScaleFactor = Constants.DessertCollectionViewCell.minimumScaleFactor
         dessertNameLabel.adjustsFontSizeToFitWidth = true
-        dessertNameLabel.font = .systemFont(ofSize: 30)
+        dessertNameLabel.font = .systemFont(ofSize: Constants.DessertCollectionViewCell.fontSize)
         dessertNameLabel.textAlignment = .center
         dessertNameLabel.numberOfLines = 0
         dessertNameLabel.translatesAutoresizingMaskIntoConstraints = false

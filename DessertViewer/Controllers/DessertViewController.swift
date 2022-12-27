@@ -48,13 +48,14 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        dessertViewModel.fetchDesserts(from: "https://themealdb.com/api/json/v1/1/filter.php?c=Dessert") { [weak self] result in
+        dessertViewModel.fetchDesserts(from: Constants.Endpoints.dessertList) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .failure(_):
                 DispatchQueue.main.async {
-                    self.displayAlert(title: "Error!", message: "Could not get list of desserts! Please refresh.")
+                    self.displayAlert(title: Constants.ErrorAlert.title,
+                                      message: Constants.ErrorAlert.dessertListMessage)
                 }
             case .success(let desserts):
                 // sort desserts alphabetically
@@ -62,7 +63,7 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
             }
         }
         
-        navigationItem.title = "Desserts"
+        navigationItem.title = Constants.DessertVC.navigationItemTitle
         view.addSubview(collectionView)
         view.addSubview(activityIndicatorView)
         collectionView.backgroundColor = .systemBackground
@@ -86,12 +87,15 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width/2 - 10,
-                      height: view.frame.width/1.65 - 10)
+        return CGSize(width: view.frame.width/Constants.DessertVC.cellWidthRatio - Constants.DessertVC.cellSubConstant,
+                      height: view.frame.width/Constants.DessertVC.cellHeightRatio - Constants.DessertVC.cellSubConstant)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        return UIEdgeInsets(top: Constants.DessertVC.cellEdgeInsetPadding,
+                            left: Constants.DessertVC.cellEdgeInsetPadding,
+                            bottom: Constants.DessertVC.cellEdgeInsetPadding,
+                            right: Constants.DessertVC.cellEdgeInsetPadding)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

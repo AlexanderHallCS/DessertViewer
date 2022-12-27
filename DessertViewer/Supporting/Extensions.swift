@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default) { action -> Void in
@@ -20,7 +19,6 @@ extension UIViewController {
 }
 
 extension String {
-    
     func split(pattern: String) -> [String] {
         let regex = try! NSRegularExpression(pattern: pattern)
         let matches = regex.matches(in: self, range: NSRange(0..<utf16.count))

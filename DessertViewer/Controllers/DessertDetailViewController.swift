@@ -32,19 +32,19 @@ class DessertDetailViewController: UIViewController {
     
     let instructionsLabel: UILabel = {
         let instructionsLabel = UILabel()
-        instructionsLabel.text = "Instructions:"
-        instructionsLabel.minimumScaleFactor = 0.5
+        instructionsLabel.text = Constants.DessertDetailVC.instructionsLabelText
+        instructionsLabel.minimumScaleFactor = Constants.DessertDetailVC.minimumScaleFactor
         instructionsLabel.adjustsFontSizeToFitWidth = true
-        instructionsLabel.font = .systemFont(ofSize: 25)
+        instructionsLabel.font = .systemFont(ofSize: Constants.DessertDetailVC.sectionLabelFont)
         instructionsLabel.translatesAutoresizingMaskIntoConstraints = false
         return instructionsLabel
     }()
     
     let instructionsListLabel: UILabel = {
         let instructionsListLabel = UILabel()
-        instructionsListLabel.minimumScaleFactor = 0.5
+        instructionsListLabel.minimumScaleFactor = Constants.DessertDetailVC.minimumScaleFactor
         instructionsListLabel.adjustsFontSizeToFitWidth = true
-        instructionsListLabel.font = .systemFont(ofSize: 20)
+        instructionsListLabel.font = .systemFont(ofSize: Constants.DessertDetailVC.listLabelFont)
         instructionsListLabel.numberOfLines = 0
         instructionsListLabel.translatesAutoresizingMaskIntoConstraints = false
         return instructionsListLabel
@@ -52,19 +52,19 @@ class DessertDetailViewController: UIViewController {
     
     let ingredientsLabel: UILabel = {
         let ingredientsLabel = UILabel()
-        ingredientsLabel.text = "Ingredients/Measurements:"
-        ingredientsLabel.minimumScaleFactor = 0.5
+        ingredientsLabel.text = Constants.DessertDetailVC.ingredientsLabelText
+        ingredientsLabel.minimumScaleFactor = Constants.DessertDetailVC.minimumScaleFactor
         ingredientsLabel.adjustsFontSizeToFitWidth = true
-        ingredientsLabel.font = .systemFont(ofSize: 25)
+        ingredientsLabel.font = .systemFont(ofSize: Constants.DessertDetailVC.sectionLabelFont)
         ingredientsLabel.translatesAutoresizingMaskIntoConstraints = false
         return ingredientsLabel
     }()
     
     let ingredientsListLabel: UILabel = {
         let ingredientsListLabel = UILabel()
-        ingredientsListLabel.minimumScaleFactor = 0.5
+        ingredientsListLabel.minimumScaleFactor = Constants.DessertDetailVC.minimumScaleFactor
         ingredientsListLabel.adjustsFontSizeToFitWidth = true
-        ingredientsListLabel.font = .systemFont(ofSize: 20)
+        ingredientsListLabel.font = .systemFont(ofSize: Constants.DessertDetailVC.listLabelFont)
         ingredientsListLabel.numberOfLines = 0
         ingredientsListLabel.translatesAutoresizingMaskIntoConstraints = false
         return ingredientsListLabel
@@ -95,13 +95,14 @@ class DessertDetailViewController: UIViewController {
         let dessert = dessertDetailViewModel.dessert
         navigationItem.title = dessert.strMeal
         
-        dessertDetailViewModel.fetchDessertDetails(from: "https://themealdb.com/api/json/v1/1/lookup.php?i=" + dessert.idMeal) { result in
+        dessertDetailViewModel.fetchDessertDetails(from: Constants.Endpoints.dessert + dessert.idMeal) { result in
             switch result {
             case .failure(_):
                 DispatchQueue.main.async {
                     self.activityIndicatorView.stopAnimating()
                     self.activityIndicatorView.removeFromSuperview()
-                    self.displayAlert(title: "Error!", message: "Could not get dessert details! Please go back and try again.")
+                    self.displayAlert(title: Constants.ErrorAlert.title,
+                                      message: Constants.ErrorAlert.dessertMessage)
                 }
                 return
             case .success(let dessertDetail):
@@ -147,30 +148,30 @@ class DessertDetailViewController: UIViewController {
             
             dessertImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             dessertImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            dessertImageView.widthAnchor.constraint(equalToConstant: view.frame.height/3),
-            dessertImageView.heightAnchor.constraint(equalToConstant: view.frame.height/3),
+            dessertImageView.widthAnchor.constraint(equalToConstant: view.frame.height/Constants.DessertDetailVC.Constraints.imageViewDimRatio),
+            dessertImageView.heightAnchor.constraint(equalToConstant: view.frame.height/Constants.DessertDetailVC.Constraints.imageViewDimRatio),
             
-            instructionsLabel.topAnchor.constraint(equalTo: dessertImageView.bottomAnchor, constant: 10),
-            instructionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            instructionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            instructionsLabel.bottomAnchor.constraint(equalTo: instructionsListLabel.topAnchor, constant: -10),
+            instructionsLabel.topAnchor.constraint(equalTo: dessertImageView.bottomAnchor, constant: Constants.DessertDetailVC.Constraints.sectionLabelPadding),
+            instructionsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.DessertDetailVC.Constraints.sectionLabelPadding),
+            instructionsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.DessertDetailVC.Constraints.sectionLabelPadding),
+            instructionsLabel.bottomAnchor.constraint(equalTo: instructionsListLabel.topAnchor, constant: -Constants.DessertDetailVC.Constraints.sectionLabelPadding),
             
-            instructionsListLabel.topAnchor.constraint(equalTo: instructionsLabel.bottomAnchor, constant: 10),
-            instructionsListLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            instructionsListLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            instructionsListLabel.bottomAnchor.constraint(equalTo: ingredientsLabel.topAnchor, constant: -10),
+            instructionsListLabel.topAnchor.constraint(equalTo: instructionsLabel.bottomAnchor, constant: Constants.DessertDetailVC.Constraints.listLabelVertPadding),
+            instructionsListLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.DessertDetailVC.Constraints.listLabelHorizPadding),
+            instructionsListLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.DessertDetailVC.Constraints.listLabelHorizPadding),
+            instructionsListLabel.bottomAnchor.constraint(equalTo: ingredientsLabel.topAnchor, constant: -Constants.DessertDetailVC.Constraints.listLabelVertPadding),
             
-            ingredientsLabel.topAnchor.constraint(equalTo: instructionsListLabel.bottomAnchor, constant: 10),
-            ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            ingredientsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            ingredientsLabel.bottomAnchor.constraint(equalTo: ingredientsListLabel.topAnchor, constant: -10),
+            ingredientsLabel.topAnchor.constraint(equalTo: instructionsListLabel.bottomAnchor, constant: Constants.DessertDetailVC.Constraints.sectionLabelPadding),
+            ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.DessertDetailVC.Constraints.sectionLabelPadding),
+            ingredientsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.DessertDetailVC.Constraints.sectionLabelPadding),
+            ingredientsLabel.bottomAnchor.constraint(equalTo: ingredientsListLabel.topAnchor, constant: -Constants.DessertDetailVC.Constraints.sectionLabelPadding),
             
-            ingredientsListLabel.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 10),
-            ingredientsListLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            ingredientsListLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            ingredientsListLabel.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: Constants.DessertDetailVC.Constraints.listLabelVertPadding),
+            ingredientsListLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.DessertDetailVC.Constraints.listLabelHorizPadding),
+            ingredientsListLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.DessertDetailVC.Constraints.listLabelHorizPadding),
             ingredientsListLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            activityIndicatorView.topAnchor.constraint(equalTo: dessertImageView.bottomAnchor, constant: 10),
+            activityIndicatorView.topAnchor.constraint(equalTo: dessertImageView.bottomAnchor, constant: Constants.DessertDetailVC.Constraints.activityIndicatorTopPadding),
             activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
