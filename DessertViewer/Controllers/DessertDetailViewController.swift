@@ -123,7 +123,6 @@ class DessertDetailViewController: UIViewController {
         contentView.addSubview(ingredientsListLabel)
         
         dessertImageView.loadImage(urlString: dessert.strMealThumb)
-        //scrollView.showsVerticalScrollIndicator = false
         setUpConstraints()
         
         view.backgroundColor = .systemBackground

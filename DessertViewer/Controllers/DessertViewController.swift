@@ -65,6 +65,7 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
         navigationItem.title = "Desserts"
         view.addSubview(collectionView)
         view.addSubview(activityIndicatorView)
+        collectionView.backgroundColor = .systemBackground
         setUpConstraints()
     }
     
@@ -86,7 +87,7 @@ class DessertViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width/2 - 10,
-                      height: view.frame.height/3.7)
+                      height: view.frame.width/1.65 - 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

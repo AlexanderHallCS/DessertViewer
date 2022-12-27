@@ -24,8 +24,9 @@ class DessertCollectionViewCell: UICollectionViewCell {
     
     let dessertNameLabel: UILabel = {
         let dessertNameLabel = UILabel()
+        dessertNameLabel.adjustsFontSizeToFitWidth = true
         dessertNameLabel.minimumScaleFactor = 0.5
-        dessertNameLabel.font = .systemFont(ofSize: 20)
+        dessertNameLabel.font = .systemFont(ofSize: 30)
         dessertNameLabel.textAlignment = .center
         dessertNameLabel.numberOfLines = 0
         dessertNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -42,14 +43,15 @@ class DessertCollectionViewCell: UICollectionViewCell {
     
     private func setUpConstraints() {
         NSLayoutConstraint.activate([
-            dessertImageView.leadingAnchor.constraint(equalTo: dessertView.leadingAnchor),
             dessertImageView.topAnchor.constraint(equalTo: dessertView.topAnchor),
+            dessertImageView.leadingAnchor.constraint(equalTo: dessertView.leadingAnchor),
             dessertImageView.widthAnchor.constraint(equalToConstant: contentView.frame.width),
             dessertImageView.heightAnchor.constraint(equalToConstant: contentView.frame.width),
             
-            dessertNameLabel.centerXAnchor.constraint(equalTo: dessertImageView.centerXAnchor),
             dessertNameLabel.topAnchor.constraint(equalTo: dessertImageView.bottomAnchor),
-            dessertNameLabel.widthAnchor.constraint(equalTo: dessertImageView.widthAnchor)
+            dessertNameLabel.centerXAnchor.constraint(equalTo: dessertImageView.centerXAnchor),
+            dessertNameLabel.widthAnchor.constraint(equalTo: dessertImageView.widthAnchor),
+            dessertNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
